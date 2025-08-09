@@ -3,17 +3,21 @@ package tests;
 import com.codeborne.selenide.Selenide;
 import junit.UITest;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.TicketPage;
 import io.qameta.allure.*;
 
+@Feature("Покупка билета")
 @Epic("Домашка 7")
+@Tag("Билеты")
+@Severity(SeverityLevel.BLOCKER)
 @UITest
 public class TicketPurchaseTest {
 
     public TicketPage ticketPage = new TicketPage();
 
-    @Feature("Покупка билета")
+    @Story("Покупка билета (тест)")
     @Test
     public void buyTicket() {
         ticketPage.clickMovie("Свинка");

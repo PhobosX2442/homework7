@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.Selenide;
 import junit.UITest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.FilterPage;
 import pages.TicketPage;
@@ -11,12 +12,15 @@ import io.qameta.allure.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Epic("Домашка 7")
+@Feature("Настройка фильтров")
+@Tag("Фильтры")
+@Severity(SeverityLevel.CRITICAL)
 @UITest
 public class FilterTest  {
     public FilterPage filterPage = new FilterPage();
     public TicketPage ticketPage = new TicketPage();
 
-    @Feature("Настройка фильтров")
+    @Story("Настройка фильтров (тест)")
     @Test
     public void useFilters() {
         ticketPage.clickFilterPage();

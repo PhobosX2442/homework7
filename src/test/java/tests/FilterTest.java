@@ -18,7 +18,7 @@ public class FilterTest  {
     private FilmCatalogPage filmCatalogPage = new FilmCatalogPage();
 
     @Story("Настройка фильтров (тест)")
-    @DisplayName("Публикация отзыва")
+    @DisplayName("Настройка фильтров")
     @Test
     public void useFilters() {
         filmCatalogPage.clickFilterPage();

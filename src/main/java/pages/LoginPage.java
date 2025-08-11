@@ -10,7 +10,7 @@ public class LoginPage {
     private SelenideElement inputPassword = $("#password");
     private SelenideElement buttonSubmit = $("button[data-qa-id='login_submit_button']");
 
-    public LoginPage openBrowser() {
+    public LoginPage openLoginPage() {
          open("/login");
          return this;
     }

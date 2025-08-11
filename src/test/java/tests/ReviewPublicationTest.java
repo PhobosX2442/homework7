@@ -25,15 +25,17 @@ public class ReviewPublicationTest {
     @Test
     public void publicationReview() {
 
+        String reviewText = "Какой-то невнятный отзыв";
+
         filmCatalogPage.selectFilm("Титаник");
-        filmPage.setReviewText("Какой-то невнятный отзыв");
+        filmPage.setReviewText(reviewText);
         filmPage.selectGrade("4");
         filmPage.submitReview();
 
         String newReviewText = filmPage.getReviewText();
 
         //проверка на нахождения нужного отзыва
-        assertThat(newReviewText).isEqualTo("Какой-то невнятный отзыв");
+        assertThat(newReviewText).isEqualTo(reviewText);
         //удаление отзыва
         filmPage.clickReviewDelete();
     }

@@ -2,18 +2,18 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 public class FilmPage {
 
     private SelenideElement reviewArea = $("textarea[data-qa-id='movie_review_input']");
     private SelenideElement btnReviewSubmit = $("button[data-qa-id='movie_review_submit_button']");
     private SelenideElement btnGradeReview = $x("//button[@dir='ltr']");
-    private SelenideElement lastReview = $x("//*[@id=\"root\"]/div[1]/main/div/div[1]/div/div/div[2]/p");
+    private SelenideElement reviewText = $x("//*[@id=\"root\"]/div[1]/main/div/div[1]/div/div/div[2]/p");
     private SelenideElement btnReviewMenu = $(".lucide-ellipsis-vertical");
     private SelenideElement reviewDeleteOption = $("div[data-qa-id*='delete']");
     private SelenideElement btnBuyTicket = $x("//p[contains(text(), \"Купить билет\")]\n");
+    private SelenideElement filmGenre = $("p[class$='mt-5']");
 
     public void setReviewText(String reviewText) {
         reviewArea.setValue(reviewText);
@@ -33,11 +33,16 @@ public class FilmPage {
     }
 
     public String getReviewText() {
-        return lastReview.getText();
+        //Получение первого отзыва, так как именно он стабильно наш (если есть)
+        return reviewText.getText();
     }
 
     public void clickReviewDelete() {
         btnReviewMenu.click();
         reviewDeleteOption.click();
+    }
+
+    public String checkGenreText() {
+        return filmGenre.getText();
     }
 }

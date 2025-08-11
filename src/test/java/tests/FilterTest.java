@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.FilmCatalogPage;
 import io.qameta.allure.*;
+import pages.FilmPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,21 +16,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Severity(SeverityLevel.CRITICAL)
 @UITest
 public class FilterTest  {
-    private FilmCatalogPage filmCatalogPage = new FilmCatalogPage();
+   private FilmPage filmPage = new FilmPage();
 
     @Story("Настройка фильтров (тест)")
     @DisplayName("Настройка фильтров")
     @Test
+
     public void useFilters() {
-        filmCatalogPage.clickFilterPage();
-        filmCatalogPage.setCityFilter("MSK");
-        filmCatalogPage.setGenreFilter("Мюзикл");
-        filmCatalogPage.setSortFilter("Старые");
+
+        String setGenre = "Мюзикл";
+
+        new FilmCatalogPage()
+                .clickFilterPage()
+                .setCityFilter("MSK")
+                .setSortFilter("Старые")
+                .setGenreFilter(setGenre)
         //переход на страницу фильма
-        filmCatalogPage.clickFilm(1);
+        .clickFilm(1);
         //проверка жанра
-        String genre = filmCatalogPage.checkGenre();
-        assertThat(genre).isEqualTo("Жанр: Мюзикл");
+        String genre = filmPage.checkGenreText();
+        assertThat(genre).isEqualTo("Жанр: " + setGenre);
     }
 }
 

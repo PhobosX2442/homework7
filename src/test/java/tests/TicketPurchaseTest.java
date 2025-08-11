@@ -27,7 +27,7 @@ public class TicketPurchaseTest {
     public void buyTicket() {
         filmCatalogPage.selectFilm("Свинка");
         filmPage.clickBuyTicket();
-        Assertions.assertEquals("Покупка билета", paymentPage.PaymentPageTitle()); //проверка нахождения на странице оплаты
+        Assertions.assertEquals("Покупка билета", paymentPage.paymentPageTitle()); //проверка нахождения на странице оплаты
         paymentPage.addCardNumber("Auto Toster","4242424242424242", "Декабрь", "2025", "123");
         paymentPage.btnPaymentClick();
         Assertions.assertEquals("Спасибо за покупку", paymentPage.checkSuccessPayText());

@@ -15,7 +15,7 @@ public class PaymentPage {
     private SelenideElement cardName = $("input[data-qa-id='payment_card_holder_input']");
     private SelenideElement successPayText = $x("//p[@class='text-xl mt-5']");
 
-    public String PaymentPageTitle() {
+    public String paymentPageTitle() {
         return namePayPage.getText();
     }
 

@@ -1,36 +1,35 @@
 package tests;
 
-import com.codeborne.selenide.Selenide;
 import junit.UITest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pages.FilterPage;
-import pages.TicketPage;
+import pages.FilmCatalogPage;
 import io.qameta.allure.*;
-
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Epic("Домашка 7")
 @Feature("Настройка фильтров")
-@Tag("Фильтры")
+@Tag("smoke")
 @Severity(SeverityLevel.CRITICAL)
 @UITest
 public class FilterTest  {
-    public FilterPage filterPage = new FilterPage();
-    public TicketPage ticketPage = new TicketPage();
+    private FilmCatalogPage filmCatalogPage = new FilmCatalogPage();
 
     @Story("Настройка фильтров (тест)")
+    @DisplayName("Публикация отзыва")
     @Test
     public void useFilters() {
-        ticketPage.clickFilterPage();
-        filterPage.pickFilters("MSK","Мюзикл","Старые");
+        filmCatalogPage.clickFilterPage();
+        filmCatalogPage.setCityFilter("MSK");
+        filmCatalogPage.setGenreFilter("Мюзикл");
+        filmCatalogPage.setSortFilter("Старые");
         //переход на страницу фильма
-        filterPage.clickFirstFilm();
+        filmCatalogPage.clickFilm(1);
         //проверка жанра
-        String genre = filterPage.checkGenre();
+        String genre = filmCatalogPage.checkGenre();
         assertThat(genre).isEqualTo("Жанр: Мюзикл");
-        Selenide.closeWebDriver();
     }
 }
 

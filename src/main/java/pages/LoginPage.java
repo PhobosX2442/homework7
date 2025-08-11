@@ -10,20 +10,23 @@ public class LoginPage {
     private SelenideElement inputPassword = $("#password");
     private SelenideElement buttonSubmit = $("button[data-qa-id='login_submit_button']");
 
-    public void openBrowser(String url) {
-        open(url);
+    public LoginPage openBrowser() {
+         open("/login");
+         return this;
     }
 
-    public void setEmail(String email) {
+    public LoginPage setEmail(String email) {
         inputEmail.setValue(email);
+        return this;
     }
 
-    public void setPassword(String password) {
+    public LoginPage setPassword(String password) {
         inputPassword.setValue(password);
+        return this;
     }
 
-    public void clickLogin() {
+    public LoginPage clickLogin() {
         buttonSubmit.click();
+        return this;
     }
-
 }

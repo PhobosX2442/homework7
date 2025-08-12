@@ -2,6 +2,9 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class FilmPage {
@@ -33,6 +36,8 @@ public class FilmPage {
     }
     public void submitReview() {
         btnReviewSubmit.click();
+        getReviewArea().shouldNotBe(visible, Duration.ofSeconds(3));
+
     }
 
     public String getReviewText() {

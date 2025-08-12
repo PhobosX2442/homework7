@@ -34,7 +34,6 @@ public class ReviewPublicationTest {
         filmPage.setReviewText(reviewText);
         filmPage.selectGrade("4");
         filmPage.submitReview();
-        filmPage.getReviewArea().shouldNotBe(visible, Duration.ofSeconds(3));
 
         String newReviewText = filmPage.getReviewText();
 

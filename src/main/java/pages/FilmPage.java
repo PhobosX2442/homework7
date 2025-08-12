@@ -9,12 +9,15 @@ public class FilmPage {
     private SelenideElement reviewArea = $("textarea[data-qa-id='movie_review_input']");
     private SelenideElement btnReviewSubmit = $("button[data-qa-id='movie_review_submit_button']");
     private SelenideElement btnGradeReview = $x("//button[@dir='ltr']");
-    private SelenideElement reviewText = $x("//*[@id=\"root\"]/div[1]/main/div/div[1]/div/div/div[2]/p");
+    private SelenideElement reviewText = $(".whitespace-pre-line:first-of-type");
     private SelenideElement btnReviewMenu = $(".lucide-ellipsis-vertical");
     private SelenideElement reviewDeleteOption = $("div[data-qa-id*='delete']");
     private SelenideElement btnBuyTicket = $x("//p[contains(text(), \"Купить билет\")]\n");
     private SelenideElement filmGenre = $("p[class$='mt-5']");
 
+    public SelenideElement getReviewArea() {
+        return reviewArea;
+    }
     public void setReviewText(String reviewText) {
         reviewArea.setValue(reviewText);
     }

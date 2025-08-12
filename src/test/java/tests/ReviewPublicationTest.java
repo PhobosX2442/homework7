@@ -8,6 +8,9 @@ import pages.FilmCatalogPage;
 import pages.FilmPage;
 import io.qameta.allure.*;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Feature("Публикация отзыва")
@@ -31,6 +34,7 @@ public class ReviewPublicationTest {
         filmPage.setReviewText(reviewText);
         filmPage.selectGrade("4");
         filmPage.submitReview();
+        filmPage.getReviewArea().shouldNotBe(visible, Duration.ofSeconds(3));
 
         String newReviewText = filmPage.getReviewText();
 

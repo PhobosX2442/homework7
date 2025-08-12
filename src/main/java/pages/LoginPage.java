@@ -10,9 +10,11 @@ public class LoginPage {
     private SelenideElement inputEmail = $("#email");
     private SelenideElement inputPassword = $("#password");
     private SelenideElement buttonSubmit = $("button[data-qa-id='login_submit_button']");
+    private SelenideElement btnLogin = $("[data-qa-id='login_page_button']");
 
     public LoginPage open() {
-         Selenide.open("/login");
+         Selenide.open("/");
+         btnLogin.click();
          return this;
     }
 

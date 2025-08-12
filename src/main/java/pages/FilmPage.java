@@ -42,7 +42,7 @@ public class FilmPage {
         reviewDeleteOption.click();
     }
 
-    public String checkGenreText() {
+    public String getGenreText() {
         return filmGenre.getText();
     }
 }

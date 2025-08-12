@@ -34,7 +34,7 @@ public class FilterTest  {
         //переход на страницу фильма
         .clickFilm(1);
         //проверка жанра
-        String genre = filmPage.checkGenreText();
+        String genre = filmPage.getGenreText();
         assertThat(genre).isEqualTo("Жанр: " + setGenre);
     }
 }

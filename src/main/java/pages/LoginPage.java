@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -10,8 +11,8 @@ public class LoginPage {
     private SelenideElement inputPassword = $("#password");
     private SelenideElement buttonSubmit = $("button[data-qa-id='login_submit_button']");
 
-    public LoginPage openLoginPage() {
-         open("/login");
+    public LoginPage open() {
+         Selenide.open("/login");
          return this;
     }
 

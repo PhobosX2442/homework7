@@ -10,7 +10,7 @@ public class LoginExtension implements BeforeEachCallback {
     public void beforeEach(ExtensionContext extensionContext) {
 
         new LoginPage()
-                .openLoginPage()
+                .open()
                 .setEmail("quicksilverx@yandex.ru")
                 .setPassword("Qwer1234")
                 .clickLogin();

@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.12.0' //allure
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform('org.junit:junit-bom:5.10.0')
+    implementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.assertj:assertj-core:3.27.3'
+    implementation 'com.codeborne:selenide:7.9.4'
+    implementation 'io.qameta.allure:allure-assertj:2.29.1' //allure
+    testImplementation 'io.qameta.allure:allure-junit5:2.29.1' //allure
+}
+
+test {
+    useJUnitPlatform()
+}

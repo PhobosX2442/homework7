@@ -1,11 +1,11 @@
 package tests;
 
+import io.qameta.allure.*;
 import junit.UITest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.FilmCatalogPage;
-import io.qameta.allure.*;
 import pages.FilmPage;
 
 import static org.assertj.core.api.Assertions.assertThat;

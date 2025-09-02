@@ -5,7 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPage {
     private SelenideElement inputEmail = $("#email");

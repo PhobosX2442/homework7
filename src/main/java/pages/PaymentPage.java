@@ -21,17 +21,6 @@ public class PaymentPage {
         return namePayPage.getText();
     }
 
-    @Step("Заполняем данные карты")
-    public void addCardNumber(String name, String number, String month, String year, String CVV) {
-//        cardName.setValue(name);
-//        cardNumber.setValue(number);
-//        cardMonth.click();
-//        $x("//*[text() = '" + month + "']/parent::*[@class]").click();
-//        cardYear.click();
-//        $x("//*[text() = '" + year + "']/parent::*[@class]").click();
-//        cardCVV.setValue(CVV);
-    }
-
     @Step("Устанавливаем имя держателя карты")
     public void setCardName(String name) {
         cardName.setValue(name);

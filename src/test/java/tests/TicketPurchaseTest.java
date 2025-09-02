@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import junit.UITest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import pages.FilmCatalogPage;
 import pages.FilmPage;
 import pages.PaymentPage;
-import io.qameta.allure.*;
 
 @Feature("Покупка билета")
 @Epic("Домашка 7")

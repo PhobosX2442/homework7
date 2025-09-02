@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
@@ -15,24 +16,57 @@ public class PaymentPage {
     private SelenideElement cardName = $("input[data-qa-id='payment_card_holder_input']");
     private SelenideElement successPayText = $x("//p[@class='text-xl mt-5']");
 
+    @Step("Берём текст с названием страницы оплаты")
     public String paymentPageTitle() {
         return namePayPage.getText();
     }
 
+    @Step("Заполняем данные карты")
     public void addCardNumber(String name, String number, String month, String year, String CVV) {
-        cardName.setValue(name);
-        cardNumber.setValue(number);
-        cardMonth.click();
-        $x("//*[text() = '" + month + "']/parent::*[@class]").click();
-        cardYear.click();
-        $x("//*[text() = '" + year + "']/parent::*[@class]").click();
-        cardCVV.setValue(CVV);
+//        cardName.setValue(name);
+//        cardNumber.setValue(number);
+//        cardMonth.click();
+//        $x("//*[text() = '" + month + "']/parent::*[@class]").click();
+//        cardYear.click();
+//        $x("//*[text() = '" + year + "']/parent::*[@class]").click();
+//        cardCVV.setValue(CVV);
     }
 
+    @Step("Устанавливаем имя держателя карты")
+    public void setCardName(String name) {
+        cardName.setValue(name);
+    }
+
+    @Step("Устанавливаем номер карты")
+    public void setCardNumber(String number) {
+        cardNumber.setValue(number);
+    }
+
+    @Step("Выбираем месяц карты")
+    public void selectMonth(String month) {
+        cardMonth.click();
+        $x("//*[text() = '" + month + "']/parent::*[@class]").click();
+    }
+
+    @Step("Выбираем год карты")
+    public void selectYear(String year) {
+        cardYear.click();
+        $x("//*[text() = '" + year + "']/parent::*[@class]").click();
+    }
+
+    @Step("Устанавливаем CVV")
+    public PaymentPage setCVV(String cvv) {
+        cardCVV.setValue(cvv);
+        return this;
+    }
+
+
+    @Step("Кликаем на кнопку оплаты")
     public void btnPaymentClick() {
         btnPayment.click();
     }
 
+    @Step("Находим текст, символизирующий успешную оплату")
     public String checkSuccessPayText() {
         return successPayText.getText();
     }

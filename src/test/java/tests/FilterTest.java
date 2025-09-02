@@ -31,11 +31,15 @@ public class FilterTest  {
                 .setCityFilter("MSK")
                 .setSortFilter("Старые")
                 .setGenreFilter(setGenre)
-        //переход на страницу фильма
+
         .clickFilm(1);
-        //проверка жанра
+
         String genre = filmPage.getGenreText();
-        assertThat(genre).isEqualTo("Жанр: " + setGenre);
+
+        Allure.step("Проверяем нахождение на странице с фильтрами", () -> {
+            assertThat(genre).isEqualTo("Жанр: " + setGenre);
+        });
+
     }
 }
 

@@ -25,11 +25,23 @@ public class TicketPurchaseTest {
     @DisplayName("Покупка билета")
     @Test
     public void buyTicket() {
-        filmCatalogPage.selectFilm("Свинка");
+        filmCatalogPage.selectFilm("Титаник");
         filmPage.clickBuyTicket();
-        Assertions.assertEquals("Покупка билета", paymentPage.paymentPageTitle()); //проверка нахождения на странице оплаты
-        paymentPage.addCardNumber("Auto Toster","4242424242424242", "Декабрь", "2025", "123");
+
+        Allure.step("Проверяем нахождение на странице оплаты", () -> {
+            Assertions.assertEquals("Покупка билета", paymentPage.paymentPageTitle());
+        });
+
+        paymentPage.setCardName("Auto Toster");
+        paymentPage.setCardNumber("4242424242424242");
+        paymentPage.selectMonth("Декабрь");
+        paymentPage.selectYear("2025");
+        paymentPage.setCVV("123");
         paymentPage.btnPaymentClick();
-        Assertions.assertEquals("Спасибо за покупку", paymentPage.checkSuccessPayText());
+
+        Allure.step("Проверяем, прошла ли покупка успешно", () -> {
+            Assertions.assertEquals("Спасибо за покупку", paymentPage.checkSuccessPayText());
+        });
+
     }
 }

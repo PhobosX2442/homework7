@@ -1,16 +1,13 @@
 package tests;
 
+import io.qameta.allure.*;
 import junit.UITest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.FilmCatalogPage;
 import pages.FilmPage;
-import io.qameta.allure.*;
 
-import java.time.Duration;
-
-import static com.codeborne.selenide.Condition.visible;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Feature("Публикация отзыва")
@@ -31,15 +28,16 @@ public class ReviewPublicationTest {
         String reviewText = "Какой-то невнятный отзыв";
 
         filmCatalogPage.selectFilm("Титаник");
-        filmPage.setReviewText(reviewText);
+        filmPage.setTextReview(reviewText);
         filmPage.selectGrade("4");
         filmPage.submitReview();
 
-        String newReviewText = filmPage.getReviewText();
+        String newReviewText = filmPage.getTextReview();
 
-        //проверка на нахождения нужного отзыва
-        assertThat(newReviewText).isEqualTo(reviewText);
-        //удаление отзыва
-        filmPage.clickReviewDelete();
+        Allure.step("Проверяем текст", () -> {
+            assertThat(newReviewText).isEqualTo(reviewText);
+        });
+
+        filmPage.clickDeleteReview();
     }
 }

@@ -1,56 +1,66 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class FilmPage {
 
-    private SelenideElement reviewArea = $("textarea[data-qa-id='movie_review_input']");
+    private SelenideElement areaReview = $("textarea[data-qa-id='movie_review_input']");
     private SelenideElement btnReviewSubmit = $("button[data-qa-id='movie_review_submit_button']");
-    private SelenideElement btnGradeReview = $x("//button[@dir='ltr']");
-    private SelenideElement reviewText = $(".whitespace-pre-line:first-of-type");
+    private SelenideElement btnReviewGrade = $x("//button[@dir='ltr']");
+    private SelenideElement textReview = $(".whitespace-pre-line:first-of-type");
     private SelenideElement btnReviewMenu = $(".lucide-ellipsis-vertical");
-    private SelenideElement reviewDeleteOption = $("div[data-qa-id*='delete']");
+    private SelenideElement optionReviewDelete = $("div[data-qa-id*='delete']");
     private SelenideElement btnBuyTicket = $x("//p[contains(text(), \"Купить билет\")]\n");
-    private SelenideElement filmGenre = $("p[class$='mt-5']");
+    private SelenideElement textFilmGenre = $("p[class$='mt-5']");
 
-    public SelenideElement getReviewArea() {
-        return reviewArea;
-    }
-    public void setReviewText(String reviewText) {
-        reviewArea.setValue(reviewText);
+    @Step("Находим поле заполнения отзыва")
+    public SelenideElement getAreaReview() {
+        return areaReview;
     }
 
+    @Step("Заполняем текст с отзывом")
+    public void setTextReview(String textReview) {
+        areaReview.setValue(textReview);
+    }
+
+    @Step("Выбираем оценку")
     public void selectGrade(String score) {
-        btnGradeReview.scrollTo();
-        btnGradeReview.click();
+        btnReviewGrade.scrollTo();
+        btnReviewGrade.click();
         $x("//*[text() = '" + score + "']/parent::*[@role]").click();
     }
 
+    @Step("Нажимаем по кнопке покупки билета")
     public void clickBuyTicket() {
         btnBuyTicket.click();
     }
+
+    @Step("Нажимаем по кнопке отправки отзыва")
     public void submitReview() {
         btnReviewSubmit.click();
-        getReviewArea().shouldNotBe(visible, Duration.ofSeconds(3));
-
+        getAreaReview().shouldNotBe(visible, Duration.ofSeconds(3));
     }
 
-    public String getReviewText() {
-        //Получение первого отзыва, так как именно он стабильно наш (если есть)
-        return reviewText.getText();
+    @Step("Получаем текст отзыва")
+    public String getTextReview() {
+        return textReview.getText();
     }
 
-    public void clickReviewDelete() {
+    @Step("Удаляем оставленный отзыв")
+    public void clickDeleteReview() {
         btnReviewMenu.click();
-        reviewDeleteOption.click();
+        optionReviewDelete.click();
     }
 
+    @Step("Получаем текст жанра")
     public String getGenreText() {
-        return filmGenre.getText();
+        return textFilmGenre.getText();
     }
 }

@@ -1,11 +1,11 @@
 package tests;
 
+import io.qameta.allure.*;
 import junit.UITest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.FilmCatalogPage;
-import io.qameta.allure.*;
 import pages.FilmPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,11 +31,15 @@ public class FilterTest  {
                 .setCityFilter("MSK")
                 .setSortFilter("Старые")
                 .setGenreFilter(setGenre)
-        //переход на страницу фильма
+
         .clickFilm(1);
-        //проверка жанра
+
         String genre = filmPage.getGenreText();
-        assertThat(genre).isEqualTo("Жанр: " + setGenre);
+
+        Allure.step("Проверяем нахождение на странице с фильтрами", () -> {
+            assertThat(genre).isEqualTo("Жанр: " + setGenre);
+        });
+
     }
 }
 

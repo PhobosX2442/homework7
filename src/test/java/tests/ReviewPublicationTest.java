@@ -1,5 +1,7 @@
 package tests;
 
+import api.client.AuthClient;
+import api.steps.MovieSteps;
 import io.qameta.allure.*;
 import junit.UITest;
 import org.junit.jupiter.api.DisplayName;
@@ -8,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import pages.FilmCatalogPage;
 import pages.FilmPage;
 
+import static com.codeborne.selenide.Selenide.open;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Feature("Публикация отзыва")
@@ -24,7 +27,6 @@ public class ReviewPublicationTest {
     @DisplayName("Публикация отзыва")
     @Test
     public void publicationReview() {
-
         String reviewText = "Какой-то невнятный отзыв";
 
         filmCatalogPage.selectFilm("Титаник");
@@ -38,6 +40,10 @@ public class ReviewPublicationTest {
             assertThat(newReviewText).isEqualTo(reviewText);
         });
 
-        filmPage.clickDeleteReview();
+        String id = filmPage.getMovieId();
+        MovieSteps.deleteReview(Integer.parseInt(id), AuthClient.getAuthToken());
+
+//        filmPage.clickDeleteReview();
+
     }
 }

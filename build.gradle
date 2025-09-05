@@ -15,7 +15,7 @@ dependencies {
     testImplementation 'io.qameta.allure:allure-junit5:2.29.1' //allure
 
     // Ваша библиотека API-степов через JitPack
-    testImplementation 'com.github.PhobosX2442:hw9:v1.7'
+    testImplementation 'com.github.PhobosX2442:hw9:v1.8'
 }
 test {
     useJUnitPlatform()  {

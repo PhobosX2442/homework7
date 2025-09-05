@@ -45,7 +45,5 @@ public class ReviewPublicationTest {
 
         MovieSteps.deleteReview(id, token);
 
-//        filmPage.clickDeleteReview();
-
     }
 }

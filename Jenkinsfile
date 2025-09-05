@@ -18,20 +18,25 @@ pipeline {
         }
 
         stage('Run Tests') {
-            steps {
-                script {
-                    // Пробуем разные варианты настроек Selenide
-                    sh """
-                    # Вариант 1: Пробуем с базовыми настройками
-                    ./gradlew clean test -Ptags='${params.TAGS}' \\
-                        -Dselenide.browser=chrome \\
-                        -Dselenide.headless=true \\
-                        -Dchromeoptions.args='--no-sandbox,--disable-dev-shm-usage,--disable-gpu,--window-size=1920,1080,--remote-allow-origins=*'
-                    """
-                }
-            }
+    steps {
+        script {
+            sh """
+            # Запускаем Selenium Server
+            wget -O selenium-server.jar https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.20.0/selenium-server-4.20.0.jar
+            nohup java -jar selenium-server.jar standalone --host 0.0.0.0 --port 4444 > selenium.log 2>&1 &
+            sleep 10
+            
+            # Запускаем тесты
+            ./gradlew clean test -Ptags='${params.TAGS}' \\
+                -Dselenide.browser=chrome \\
+                -Dselenide.headless=true \\
+                -Dselenide.remote=http://localhost:4444/wd/hub \\
+                -Dchromeoptions.args='--no-sandbox,--disable-dev-shm-usage,--disable-gpu,--window-size=1920,1080,--remote-allow-origins=*'
+            """
         }
     }
+}
+
 
     post {
         always {

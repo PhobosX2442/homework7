@@ -44,6 +44,5 @@ public class ReviewPublicationTest {
         String token = AuthClient.getAuthToken();
 
         MovieSteps.deleteReview(id, token);
-
     }
 }

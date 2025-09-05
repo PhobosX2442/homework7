@@ -22,6 +22,14 @@ test {
         if (project.hasProperty("tags")) {
             includeTags(project.property("tags") as String)
         }
+        systemProperties = [
+        'selenide.browser': 'chrome',
+        'selenide.headless': 'true',
+        'selenide.downloadsFolder': 'build/downloads',
+        'selenide.reportsFolder': 'build/reports',
+        'chromeoptions.args': '--no-sandbox,--disable-dev-shm-usage,--disable-gpu,--window-size=1920,1080,--remote-allow-origins=*'
+    ]
+
 
     }
 }

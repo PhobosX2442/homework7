@@ -16,6 +16,9 @@ dependencies {
 
     // Ваша библиотека API-степов через JitPack
     testImplementation 'com.github.PhobosX2442:hw9:v1.9'
+
+     // Автоматическая загрузка ChromeDriver
+    chromedriver "io.github.bonigarcia:webdrivermanager:5.6.2"
 }
 test {
     useJUnitPlatform()  {
@@ -25,9 +28,16 @@ test {
         systemProperties = [
         'selenide.browser': 'chrome',
         'selenide.headless': 'true',
-        'webdriver.chrome.driver': '/usr/local/bin/chromedriver',
         'chromeoptions.args': '--no-sandbox,--disable-dev-shm-usage,--disable-gpu,--window-size=1920,1080,--remote-allow-origins=*',
-        'selenide.timeout': '10000'
+        'wdm.chromeDriverVersion': 'latest'
     ]
-}
+    
+    // Автоматически загружаем ChromeDriver перед тестами
+    doFirst {
+        javaexec {
+            mainClass = 'io.github.bonigarcia.wdm.WebDriverManager'
+            classpath = configurations.chromedriver
+            args = ['chrome', 'driver', '--auto-download']
+        }
+    }
 }

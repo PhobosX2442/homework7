@@ -21,7 +21,7 @@ public class FilterTest  {
     @Story("Настройка фильтров (тест)")
     @DisplayName("Настройка фильтров")
     @Test
-
+    @Tag("smoke")
     public void useFilters() {
 
         String setGenre = "Мюзикл";

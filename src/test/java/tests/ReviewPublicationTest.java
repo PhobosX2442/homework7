@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import pages.FilmCatalogPage;
 import pages.FilmPage;
 
-import static com.codeborne.selenide.Selenide.open;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Feature("Публикация отзыва")

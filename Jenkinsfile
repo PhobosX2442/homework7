@@ -26,10 +26,8 @@ pipeline {
 
     post {
         always {
-            allure([
-                includeProperties: false,
-                results: [[path: 'build/allure-results']]
-            ])
+            allure includeProperties: false,
+                   results: [[path: 'build/allure-results']]
         }
     }
 }

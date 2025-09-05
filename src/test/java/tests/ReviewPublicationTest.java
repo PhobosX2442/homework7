@@ -21,11 +21,13 @@ public class ReviewPublicationTest {
 
     private FilmPage filmPage = new FilmPage();
     private FilmCatalogPage filmCatalogPage = new FilmCatalogPage();
+    private String token;
 
     @Story("Публикация отзыва (тест)")
     @DisplayName("Публикация отзыва")
     @Test
     public void publicationReview() {
+        token = AuthClient.getAuthToken(); // По умолчанию USER
         String reviewText = "Какой-то невнятный отзыв";
 
         filmCatalogPage.selectFilm("Титаник");
@@ -40,8 +42,6 @@ public class ReviewPublicationTest {
         });
 
         Integer id = Integer.parseInt(filmPage.getMovieId());
-        String token = AuthClient.getAuthToken();
-
         MovieSteps.deleteReview(id, token);
     }
 }

@@ -58,10 +58,7 @@ public class FilmPage {
 
     public String getMovieId() {
         String url = WebDriverRunner.url();
-        if (url.contains("/movies/")) {
-            return url.replaceFirst("^https?://[^/]+/movies/", "");
-        }
-        return null;
+        return url.replaceFirst("^https?://[^/]+/movies/", "");
     }
 
     @Step("Удаляем оставленный отзыв")

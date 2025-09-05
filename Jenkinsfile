@@ -7,7 +7,12 @@ properties([
 ])
 
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3.8.4-openjdk-17' // или образ с уже установленным браузером
+            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
 
     stages {
         stage('Checkout') {
@@ -19,7 +24,14 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh "./gradlew clean test -Ptags='${params.TAGS}'"
+                script {
+                    sh """
+                    # Просто запускаем тесты - Selenide сам скачает браузер если нужно
+                    ./gradlew clean test -Ptags='${params.TAGS}' \
+                        -Dselenide.browser=chrome \
+                        -Dselenide.headless=true
+                    """
+                }
             }
         }
     }

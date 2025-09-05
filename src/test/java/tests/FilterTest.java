@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Epic("Домашка 7")
 @Feature("Настройка фильтров")
-@Tag("smoke")
 @Severity(SeverityLevel.CRITICAL)
 @UITest
 public class FilterTest  {

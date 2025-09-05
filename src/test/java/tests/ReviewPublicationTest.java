@@ -39,8 +39,7 @@ public class ReviewPublicationTest {
             assertThat(newReviewText).isEqualTo(reviewText);
         });
 
-        String stringid = filmPage.getMovieId();
-        Integer id = Integer.parseInt(stringid);
+        Integer id = Integer.parseInt(filmPage.getMovieId());
         String token = AuthClient.getAuthToken();
 
         MovieSteps.deleteReview(id, token);

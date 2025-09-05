@@ -1,6 +1,5 @@
 package pages;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
@@ -61,7 +60,8 @@ public class FilmPage {
         return url.replaceFirst("^https?://[^/]+/movies/", "");
     }
 
-    @Step("Удаляем оставленный отзыв")
+    @Deprecated
+    @Step("Удаляем оставленный отзыв [для UI]")
     public void clickDeleteReview() {
         btnReviewMenu.click();
         optionReviewDelete.click();

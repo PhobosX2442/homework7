@@ -1,33 +1,19 @@
 plugins {
     id 'java'
-    id 'io.qameta.allure' version '2.12.0' //allure
+    id 'io.qameta.allure' version '2.12.0'
 }
 
 group = 'org.example'
 version = '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
-}
-
-// Добавьте эту конфигурацию для автоматической загрузки ChromeDriver
-configurations {
-    chromedriver
-}
-
 dependencies {
-    implementation platform('org.junit:junit-bom:5.10.0')
-    implementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
     testImplementation 'org.assertj:assertj-core:3.27.3'
-    implementation 'com.codeborne:selenide:7.9.4'
-    implementation 'io.qameta.allure:allure-assertj:2.29.1' //allure
-    testImplementation 'io.qameta.allure:allure-junit5:2.29.1' //allure
-
-    // Ваша библиотека API-степов через JitPack
+    testImplementation 'com.codeborne:selenide:7.9.4'
+    testImplementation 'io.qameta.allure:allure-junit5:2.29.1'
+    testImplementation 'io.qameta.allure:allure-assertj:2.29.1'
     testImplementation 'com.github.PhobosX2442:hw9:v1.9'
-
-    // Автоматическая загрузка ChromeDriver
-    chromedriver "io.github.bonigarcia:webdrivermanager:5.6.2"
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.6.2'
 }
 
 test {
@@ -40,16 +26,6 @@ test {
     systemProperties = [
         'selenide.browser': 'chrome',
         'selenide.headless': 'true',
-        'chromeoptions.args': '--no-sandbox,--disable-dev-shm-usage,--disable-gpu,--window-size=1920,1080,--remote-allow-origins=*',
-        'wdm.chromeDriverVersion': 'latest'
+        'chromeoptions.args': '--no-sandbox,--disable-dev-shm-usage,--disable-gpu,--window-size=1920,1080,--remote-allow-origins=*'
     ]
-    
-    // Автоматически загружаем ChromeDriver перед тестами
-    doFirst {
-        javaexec {
-            mainClass = 'io.github.bonigarcia.wdm.WebDriverManager'
-            classpath = configurations.chromedriver
-            args = ['chrome', 'driver', '--auto-download']
-        }
-    }
 }

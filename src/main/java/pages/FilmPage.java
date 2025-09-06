@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
 
 import java.time.Duration;
@@ -19,6 +20,7 @@ public class FilmPage {
     private SelenideElement optionReviewDelete = $("div[data-qa-id*='delete']");
     private SelenideElement btnBuyTicket = $x("//p[contains(text(), \"Купить билет\")]\n");
     private SelenideElement textFilmGenre = $("p[class$='mt-5']");
+
 
     @Step("Находим поле заполнения отзыва")
     public SelenideElement getAreaReview() {
@@ -53,7 +55,13 @@ public class FilmPage {
         return textReview.getText();
     }
 
-    @Step("Удаляем оставленный отзыв")
+    public String getMovieId() {
+        String url = WebDriverRunner.url();
+        return url.replaceFirst("^https?://[^/]+/movies/", "");
+    }
+
+    @Deprecated
+    @Step("Удаляем оставленный отзыв [для UI]")
     public void clickDeleteReview() {
         btnReviewMenu.click();
         optionReviewDelete.click();

@@ -1,5 +1,7 @@
 package tests;
 
+import api.client.AuthClient;
+import api.steps.MovieSteps;
 import io.qameta.allure.*;
 import junit.UITest;
 import org.junit.jupiter.api.DisplayName;
@@ -19,12 +21,13 @@ public class ReviewPublicationTest {
 
     private FilmPage filmPage = new FilmPage();
     private FilmCatalogPage filmCatalogPage = new FilmCatalogPage();
+    private String token;
 
     @Story("Публикация отзыва (тест)")
     @DisplayName("Публикация отзыва")
     @Test
     public void publicationReview() {
-
+        token = AuthClient.getAuthToken(); // По умолчанию USER
         String reviewText = "Какой-то невнятный отзыв";
 
         filmCatalogPage.selectFilm("Титаник");
@@ -38,6 +41,7 @@ public class ReviewPublicationTest {
             assertThat(newReviewText).isEqualTo(reviewText);
         });
 
-        filmPage.clickDeleteReview();
+        Integer id = Integer.parseInt(filmPage.getMovieId());
+        MovieSteps.deleteReview(id, token);
     }
 }

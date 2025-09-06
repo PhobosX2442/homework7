@@ -22,6 +22,13 @@ test {
         if (project.hasProperty("tags")) {
             includeTags(project.property("tags") as String)
         }
-
+        //Parallel tests
+        systemProperties += [
+                'junit.jupiter.execution.parallel.enabled'                 : true,
+                'junit.jupiter.execution.parallel.mode.default'            : 'concurrent',
+                'junit.jupiter.execution.parallel.mode.classes.default'    : 'concurrent',
+                'junit.jupiter.execution.parallel.config.strategy'         : 'fixed',
+                'junit.jupiter.execution.parallel.config.fixed.parallelism': '3'
+        ]
     }
 }

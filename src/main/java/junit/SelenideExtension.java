@@ -7,24 +7,22 @@ import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
+import docker.DockerNetworkUtils;
 import java.util.HashMap;
-
-import static javax.swing.UIManager.put;
 
 public class SelenideExtension implements BeforeAllCallback, AfterEachCallback {
 
     @Override
     public void beforeAll(ExtensionContext extensionContext) {
+        // Автоматическое определение адреса Selenoid
+        Configuration.remote = DockerNetworkUtils.detectSelenoidUrl();
+
         // Базовые настройки Selenide
         Configuration.browser = "chrome";
         Configuration.baseUrl = "https://cinescope.t-qa.ru";
         Configuration.timeout = 60000;
         Configuration.browserSize = "1920x1080";
         Configuration.headless = false;
-
-        // Настройки для Selenoid
-        Configuration.remote = "http://host.docker.internal:4444/wd/hub";
         Configuration.browserVersion = "128.0";
 
         // Capabilities для Selenoid
@@ -41,6 +39,11 @@ public class SelenideExtension implements BeforeAllCallback, AfterEachCallback {
         chromeOptions.addArguments("--disable-dev-shm-usage");
         chromeOptions.addArguments("--disable-gpu");
         chromeOptions.addArguments("--window-size=1920,1080");
+
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        Configuration.browserCapabilities = capabilities;
+
+        System.out.println("Selenoid configured: " + Configuration.remote);
     }
 
     @Override

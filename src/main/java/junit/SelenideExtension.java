@@ -24,7 +24,7 @@ public class SelenideExtension implements BeforeAllCallback, AfterEachCallback {
         Configuration.headless = false;
 
         // Настройки для Selenoid
-        Configuration.remote = "http://localhost:4444/wd/hub";
+        Configuration.remote = "http://host.docker.internal:4444/wd/hub";
         Configuration.browserVersion = "128.0";
 
         // Capabilities для Selenoid

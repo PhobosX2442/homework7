@@ -4,6 +4,7 @@ import api.client.AuthClient;
 import api.steps.MovieSteps;
 import io.qameta.allure.*;
 import junit.UITest;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,11 @@ public class ReviewPublicationTest {
         Allure.step("Проверяем текст", () -> {
             assertThat(newReviewText).isEqualTo(reviewText);
         });
+    }
 
+    @AfterEach
+    @DisplayName("Удаление созданного отзыва")
+    public void deleteReview() {
         Integer id = Integer.parseInt(filmPage.getMovieId());
         MovieSteps.deleteReview(id, token);
     }

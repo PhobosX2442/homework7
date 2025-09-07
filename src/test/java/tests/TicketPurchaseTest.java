@@ -23,6 +23,7 @@ public class TicketPurchaseTest {
 
     @Story("Покупка билета (тест)")
     @DisplayName("Покупка билета")
+    @Tag("smoke")
     @Test
     public void buyTicket() {
         filmCatalogPage.selectFilm("Титаник");

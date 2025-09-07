@@ -49,7 +49,6 @@ public class PaymentPage {
         return this;
     }
 
-
     @Step("Кликаем на кнопку оплаты")
     public void btnPaymentClick() {
         btnPayment.click();
